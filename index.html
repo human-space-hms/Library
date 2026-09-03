@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Space Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600&family=Lora:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6EA;
+    --paper-deep:#F3EAD4;
+    --card:#FFFDF8;
+    --ink:#3A342A;
+    --ink-soft:rgba(58,52,42,0.62);
+    --ink-faint:rgba(58,52,42,0.4);
+    --slate:#5C7A99;
+    --slate-deep:#3F5C79;
+    --mauve:#C98FA0;
+    --mauve-deep:#A8677A;
+    --mustard:#E7B94A;
+    --coral:#D8624A;
+    --line:rgba(58,52,42,0.14);
+    --shadow: 0 20px 44px -20px rgba(58,52,42,0.28);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:480px; margin:0 auto; padding:0 20px 60px; position:relative; }
+  a{ color:inherit; text-decoration:none; }
+  .serif{ font-family:'Noto Serif TC', serif; }
+
+  /* ---------- Header ---------- */
+  header{ display:flex; justify-content:center; padding:26px 0 8px; }
+  header img{ height:16px; }
+
+  /* ---------- Hero ---------- */
+  .hero{ text-align:center; padding:26px 0 8px; position:relative; }
+  .hero-figures{ display:flex; justify-content:center; gap:6px; margin-bottom:14px; }
+  .hero-figures img{ width:52px; filter:drop-shadow(0 6px 10px rgba(58,52,42,0.16)); }
+  .hero-figures img:nth-child(2n){ transform:translateY(8px); }
+  .hero h1{ font-size:26px; margin:0 0 6px; font-weight:700; }
+  .hero p{ font-size:13.5px; color:var(--ink-soft); margin:0; }
+
+  /* ---------- Section shell ---------- */
+  section{ margin-top:44px; }
+  .section-label{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--slate-deep); font-weight:700; margin-bottom:10px; text-align:center; }
+  .section-title{ font-size:20px; font-weight:700; text-align:center; margin:0 0 6px; }
+  .section-sub{ font-size:13px; color:var(--ink-soft); text-align:center; margin:0 0 20px; line-height:1.7; }
+
+  /* ---------- About ---------- */
+  .about-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:26px 22px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    text-align:center;
+  }
+  .about-card .corner{ position:absolute; width:90px; opacity:0.9; }
+  .about-card .corner.c1{ right:-16px; top:-10px; transform:rotate(8deg); }
+  .about-card .corner.c2{ left:-20px; bottom:-14px; transform:rotate(-6deg); }
+  .about-zh{ font-size:15px; line-height:2; margin-bottom:14px; position:relative; z-index:2; }
+  .about-zh strong{ color:var(--slate-deep); }
+  .about-en{ font-size:12px; line-height:1.8; color:var(--ink-soft); font-family:'Lora',serif; font-style:italic; position:relative; z-index:2; }
+
+  /* ---------- Support ---------- */
+  .support-card{
+    margin-top:16px; background:linear-gradient(160deg, var(--paper-deep), var(--paper));
+    border:1px dashed var(--line); border-radius:18px; padding:20px; text-align:center;
+  }
+  .support-card p{ font-size:13.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.7; }
+  .support-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--coral); color:#fff;
+    font-weight:700; font-size:14px; padding:12px 24px; border-radius:999px;
+    box-shadow:0 10px 20px -10px rgba(58,52,42,0.5);
+  }
+
+  /* ---------- Shelf grid ---------- */
+  .shelf{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .shelf-item{
+    background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    box-shadow:0 10px 20px -14px rgba(58,52,42,0.3); display:flex; flex-direction:column;
+  }
+  .shelf-thumb{
+    aspect-ratio:3/4; background:var(--paper-deep); display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .shelf-thumb img.character{ width:62%; filter:drop-shadow(0 8px 10px rgba(58,52,42,0.14)); }
+  .shelf-thumb .play-badge{
+    position:absolute; bottom:8px; right:8px; width:26px; height:26px; border-radius:50%;
+    background:rgba(58,52,42,0.65); color:#fff; display:flex; align-items:center; justify-content:center; font-size:11px;
+  }
+  .shelf-thumb.placeholder{ color:var(--ink-faint); font-size:11px; text-align:center; padding:10px; line-height:1.6; }
+  .shelf-body{ padding:10px 12px 14px; }
+  .shelf-body .tag{ font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--slate-deep); font-weight:700; margin-bottom:4px; display:block; }
+  .shelf-body .name{ font-size:13px; font-weight:600; line-height:1.4; }
+  .shelf-body .desc{ font-size:11px; color:var(--ink-soft); margin-top:3px; line-height:1.5; }
+
+  .see-more{ text-align:center; margin-top:14px; }
+  .see-more a{ font-size:12.5px; color:var(--slate-deep); font-weight:600; border-bottom:1px solid var(--slate-deep); padding-bottom:2px; }
+
+  /* ---------- Shop ---------- */
+  .shop-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:24px 20px;
+    text-align:center; box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .shop-card .corner{ position:absolute; width:100px; right:-20px; bottom:-16px; opacity:0.9; transform:rotate(-4deg); }
+  .shop-card p{ font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.7; position:relative; z-index:2; }
+  .shop-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--slate-deep); color:#fff;
+    font-weight:700; font-size:14px; padding:13px 26px; border-radius:999px; position:relative; z-index:2;
+  }
+
+  /* ---------- Email ---------- */
+  .email-card{
+    background:linear-gradient(160deg, var(--slate-deep), #4a6785);
+    border-radius:20px; padding:26px 22px; text-align:center; color:#fff;
+  }
+  .email-card h3{ font-size:17px; margin:0 0 8px; font-family:'Noto Serif TC',serif; }
+  .email-card p{ font-size:12.5px; color:rgba(255,255,255,0.85); margin:0 0 16px; line-height:1.7; }
+
+  footer{ text-align:center; margin-top:50px; font-size:11px; color:var(--ink-faint); }
+
+  /* dashed divider */
+  .divider{ border:none; border-top:1px dashed var(--line); margin:44px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header><img src="logo.png" alt="Human Space"></header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-figures">
+      <img src="little-noticer.png" alt=""><img src="deep-diver.png" alt=""><img src="wonder-collector.png" alt=""><img src="quiet-seeker.png" alt=""><img src="quiet-observer.png" alt="">
+    </div>
+    <h1 class="serif">Human Space Library</h1>
+    <p>一座持續累積的自我探索圖書館</p>
+  </div>
+
+  <!-- About Us -->
+  <section id="about">
+    <div class="section-label">About Us</div>
+    <div class="about-card">
+      <img class="corner c1" src="little-noticer.png" alt="">
+      <img class="corner c2" src="quiet-observer.png" alt="">
+      <div class="about-zh"><strong>用科學理解自己，用覺察靠近生活。</strong><br>Human Space 陪你探索情緒、關係與內在世界，找到與自己相處的方式。</div>
+      <div class="about-en">Understand yourself through science. Move closer to life through awareness.<br>Human Space invites you to explore your emotions, relationships, and inner world, and discover new ways to live with yourself.</div>
+    </div>
+
+    <!-- Support -->
+    <div class="support-card">
+      <p>如果你喜歡我們的內容，<br>歡迎支持我們持續創作 🌱</p>
+      <a class="support-btn" href="#" target="_blank"><!-- 換成 Ko-fi 連結 -->請我們喝杯咖啡 →</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Know Yourself -->
+  <section id="know-yourself">
+    <div class="section-label">Know Yourself</div>
+    <div class="section-title serif">認識自己</div>
+    <div class="section-sub">互動測驗與小工具，陪你看看自己是怎麼感受這個世界的</div>
+    <div class="shelf">
+      <a class="shelf-item" href="zh.html">
+        <div class="shelf-thumb"><img class="character" src="wonder-collector.png" alt=""></div>
+        <div class="shelf-body">
+          <span class="tag">Quiz</span>
+          <div class="name">你是怎麼感受這個世界的？</div>
+          <div class="desc">高敏感度自我探索測驗</div>
+        </div>
+      </a>
+      <a class="shelf-item" href="#">
+        <div class="shelf-thumb placeholder">敬請期待<br>下一個互動體驗</div>
+        <div class="shelf-body">
+          <span class="tag">Coming soon</span>
+          <div class="name">下一個小工具</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Animation -->
+  <section id="animation">
+    <div class="section-label">Animation</div>
+    <div class="section-title serif">精選動畫</div>
+    <div class="section-sub">點擊直接前往 Instagram 觀看完整內容</div>
+    <div class="shelf">
+      <a class="shelf-item" href="#" target="_blank"><!-- 換成 IG Reels 連結 -->
+        <div class="shelf-thumb">
+          <img class="character" src="little-noticer.png" alt="">
+          <div class="play-badge">▶</div>
+        </div>
+        <div class="shelf-body">
+          <span class="tag">Reel</span>
+          <div class="name">敬請期待</div>
+        </div>
+      </a>
+      <a class="shelf-item" href="#" target="_blank">
+        <div class="shelf-thumb">
+          <img class="character" src="deep-diver.png" alt="">
+          <div class="play-badge">▶</div>
+        </div>
+        <div class="shelf-body">
+          <span class="tag">Reel</span>
+          <div class="name">敬請期待</div>
+        </div>
+      </a>
+    </div>
+    <div class="see-more"><a href="#" target="_blank">查看更多 Reels →</a></div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Article -->
+  <section id="article">
+    <div class="section-label">Article</div>
+    <div class="section-title serif">精選文章</div>
+    <div class="section-sub">像一本書一樣翻開閱讀</div>
+    <div class="shelf">
+      <a class="shelf-item" href="article-demo.html">
+        <div class="shelf-thumb"><img class="character" src="quiet-seeker.png" alt=""></div>
+        <div class="shelf-body">
+          <span class="tag">Article</span>
+          <div class="name">示範文章：安靜的力量</div>
+        </div>
+      </a>
+      <a class="shelf-item" href="#">
+        <div class="shelf-thumb placeholder">敬請期待<br>下一篇文章</div>
+        <div class="shelf-body">
+          <span class="tag">Coming soon</span>
+          <div class="name">下一篇文章</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Shop -->
+  <section id="shop">
+    <div class="section-label">Shop</div>
+    <div class="section-title serif">商品專區</div>
+    <div class="shop-card">
+      <img class="corner" src="wonder-collector.png" alt="">
+      <p>把探索自己的過程，<br>變成一本可以帶著走的小書。</p>
+      <a class="shop-btn" href="#" target="_blank"><!-- 換成 Ko-fi 商店連結 -->前往 Human Space 商店 →</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Email -->
+  <section id="join">
+    <div class="email-card">
+      <h3>加入 Human Space Club</h3>
+      <p>留下你的 email，成為首批會員，<br>優先獲得我們的新內容與消息。</p>
+      <!-- ConvertKit (Kit) official embed — form id 9779228 -->
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+      <form action="https://app.kit.com/forms/9779228/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9779228" data-uid="9809e05442" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800"><div data-style="clean"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" data-stacked="false" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input email-input" name="email_address" style="color: #2B2A33; border-color: #E4DBC8; border-radius: 14px; font-weight: 400; font-family: 'Noto Sans TC', sans-serif;" aria-label="Email Address" placeholder="you@example.com" required="" type="email"></div><button data-element="submit" class="formkit-submit formkit-submit action-btn" style="color: #3F5C79; background-color: #E7B94A; border-radius: 999px; font-weight: 700; font-family: 'Noto Sans TC', sans-serif; box-shadow:none; margin-top:4px;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span>加入 Human Space Club →</span></button></div><div class="formkit-powered-by-convertkit-container"><a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" data-variant="dark" target="_blank" rel="nofollow noopener">Built with Kit</a></div></div><style>.formkit-form[data-uid="9809e05442"] *{box-sizing:border-box;}.formkit-form[data-uid="9809e05442"]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.formkit-form[data-uid="9809e05442"] legend{border:none;font-size:inherit;margin-bottom:10px;padding:0;position:relative;display:table;}.formkit-form[data-uid="9809e05442"] fieldset{border:0;padding:0.01em 0 0 0;margin:0;min-width:0;}.formkit-form[data-uid="9809e05442"] body:not(:-moz-handler-blocked) fieldset{display:table-cell;}.formkit-form[data-uid="9809e05442"] h1,.formkit-form[data-uid="9809e05442"] h2,.formkit-form[data-uid="9809e05442"] h3,.formkit-form[data-uid="9809e05442"] h4,.formkit-form[data-uid="9809e05442"] h5,.formkit-form[data-uid="9809e05442"] h6{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="9809e05442"] h2{font-size:1.5em;margin:1em 0;}.formkit-form[data-uid="9809e05442"] h3{font-size:1.17em;margin:1em 0;}.formkit-form[data-uid="9809e05442"] p{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="9809e05442"] ol:not([template-default]),.formkit-form[data-uid="9809e05442"] ul:not([template-default]),.formkit-form[data-uid="9809e05442"] blockquote:not([template-default]){text-align:left;}.formkit-form[data-uid="9809e05442"] p:not([template-default]),.formkit-form[data-uid="9809e05442"] hr:not([template-default]),.formkit-form[data-uid="9809e05442"] blockquote:not([template-default]),.formkit-form[data-uid="9809e05442"] ol:not([template-default]),.formkit-form[data-uid="9809e05442"] ul:not([template-default]){color:inherit;font-style:initial;}.formkit-form[data-uid="9809e05442"] .ordered-list,.formkit-form[data-uid="9809e05442"] .unordered-list{list-style-position:outside !important;padding-left:1em;}.formkit-form[data-uid="9809e05442"] .list-item{padding-left:0;}.formkit-form[data-uid="9809e05442"][data-format="modal"]{display:none;}.formkit-form[data-uid="9809e05442"][data-format="slide in"]{display:none;}.formkit-form[data-uid="9809e05442"][data-format="sticky bar"]{display:none;}.formkit-sticky-bar .formkit-form[data-uid="9809e05442"][data-format="sticky bar"]{display:block;}.formkit-form[data-uid="9809e05442"] .formkit-input,.formkit-form[data-uid="9809e05442"] .formkit-select,.formkit-form[data-uid="9809e05442"] .formkit-checkboxes{width:100%;}.formkit-form[data-uid="9809e05442"] .formkit-button,.formkit-form[data-uid="9809e05442"] .formkit-submit{border:0;border-radius:5px;color:#ffffff;cursor:pointer;display:inline-block;text-align:center;font-size:15px;font-weight:500;cursor:pointer;margin-bottom:15px;overflow:hidden;padding:0;position:relative;vertical-align:middle;}.formkit-form[data-uid="9809e05442"] .formkit-button:hover,.formkit-form[data-uid="9809e05442"] .formkit-submit:hover,.formkit-form[data-uid="9809e05442"] .formkit-button:focus,.formkit-form[data-uid="9809e05442"] .formkit-submit:focus{outline:none;}.formkit-form[data-uid="9809e05442"] .formkit-button:hover > span,.formkit-form[data-uid="9809e05442"] .formkit-submit:hover > span,.formkit-form[data-uid="9809e05442"] .formkit-button:focus > span,.formkit-form[data-uid="9809e05442"] .formkit-submit:focus > span{background-color:rgba(0,0,0,0.1);}.formkit-form[data-uid="9809e05442"] .formkit-button > span,.formkit-form[data-uid="9809e05442"] .formkit-submit > span{display:block;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;padding:12px 24px;}.formkit-form[data-uid="9809e05442"] .formkit-input{background:#ffffff;font-size:15px;padding:12px;border:1px solid #e3e3e3;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;line-height:1.4;margin:0;-webkit-transition:border-color ease-out 300ms;transition:border-color ease-out 300ms;}.formkit-form[data-uid="9809e05442"] .formkit-input:focus{outline:none;border-color:#1677be;-webkit-transition:border-color ease 300ms;transition:border-color ease 300ms;}.formkit-form[data-uid="9809e05442"] .formkit-input::-webkit-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="9809e05442"] .formkit-input::-moz-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="9809e05442"] .formkit-input:-ms-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="9809e05442"] .formkit-input::placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="9809e05442"] [data-group="dropdown"]{position:relative;display:inline-block;width:100%;}.formkit-form[data-uid="9809e05442"] [data-group="dropdown"]::before{content:"";top:calc(50% - 2.5px);right:10px;position:absolute;pointer-events:none;border-color:#4f4f4f transparent transparent transparent;border-style:solid;border-width:6px 6px 0 6px;height:0;width:0;z-index:999;}.formkit-form[data-uid="9809e05442"] [data-group="dropdown"] select{height:auto;width:100%;cursor:pointer;color:#333333;line-height:1.4;margin-bottom:0;padding:0 6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;font-size:15px;padding:12px;padding-right:25px;border:1px solid #e3e3e3;background:#ffffff;}.formkit-form[data-uid="9809e05442"] [data-group="dropdown"] select:focus{outline:none;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"]{text-align:left;margin:0;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"]{margin-bottom:10px;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] *{cursor:pointer;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"]:last-of-type{margin-bottom:0;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]{display:none;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"] + label::after{content:none;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::after{border-color:#ffffff;content:"";}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::before{background:#10bf7a;border-color:#10bf7a;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] label{position:relative;display:inline-block;padding-left:28px;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] label::before,.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] label::after{position:absolute;content:"";display:inline-block;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] label::before{height:16px;width:16px;border:1px solid #e3e3e3;background:#ffffff;left:0px;top:3px;}.formkit-form[data-uid="9809e05442"] [data-group="checkboxes"] [data-group="checkbox"] label::after{height:4px;width:8px;border-left:2px solid #4d4d4d;border-bottom:2px solid #4d4d4d;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);left:4px;top:8px;}.formkit-form[data-uid="9809e05442"] .formkit-alert{background:#f9fafb;border:1px solid #e3e3e3;border-radius:5px;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;list-style:none;margin:25px auto;padding:12px;text-align:center;width:100%;}.formkit-form[data-uid="9809e05442"] .formkit-alert:empty{display:none;}.formkit-form[data-uid="9809e05442"] .formkit-alert-success{background:#d3fbeb;border-color:#10bf7a;color:#0c905c;}.formkit-form[data-uid="9809e05442"] .formkit-alert-error{background:#fde8e2;border-color:#f2643b;color:#ea4110;}.formkit-form[data-uid="9809e05442"] .formkit-spinner{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:0px;width:0px;margin:0 auto;position:absolute;top:0;left:0;right:0;width:0px;overflow:hidden;text-align:center;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;}.formkit-form[data-uid="9809e05442"] .formkit-spinner > div{margin:auto;width:12px;height:12px;background-color:#fff;opacity:0.3;border-radius:100%;display:inline-block;-webkit-animation:formkit-bouncedelay-formkit-form-data-uid-9809e05442- 1.4s infinite ease-in-out both;animation:formkit-bouncedelay-formkit-form-data-uid-9809e05442- 1.4s infinite ease-in-out both;}.formkit-form[data-uid="9809e05442"] .formkit-spinner > div:nth-child(1){-webkit-animation-delay:-0.32s;animation-delay:-0.32s;}.formkit-form[data-uid="9809e05442"] .formkit-spinner > div:nth-child(2){-webkit-animation-delay:-0.16s;animation-delay:-0.16s;}.formkit-form[data-uid="9809e05442"] .formkit-submit[data-active] .formkit-spinner{opacity:1;height:100%;width:50px;}.formkit-form[data-uid="9809e05442"] .formkit-submit[data-active] .formkit-spinner ~ span{opacity:0;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;width:100%;margin:10px 0;position:relative;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit-container[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#ffffff;border-radius:9px;color:#3d3d3d;cursor:pointer;display:block;height:36px;margin:0 auto;opacity:0.95;padding:0;-webkit-text-decoration:none;text-decoration:none;text-indent:100%;-webkit-transition:ease-in-out all 200ms;transition:ease-in-out all 200ms;white-space:nowrap;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:157px;background-repeat:no-repeat;background-position:center;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit:hover,.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit:focus{background-color:#ffffff;-webkit-transform:scale(1.025) perspective(1px);-ms-transform:scale(1.025) perspective(1px);transform:scale(1.025) perspective(1px);opacity:1;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit[data-variant="dark"],.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit[data-variant="light"]{background-color:transparent;border-color:transparent;width:133px;}.formkit-form[data-uid="9809e05442"] blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid #e1e1e1;}.formkit-form[data-uid="9809e05442"] .seva-custom-content{padding:15px;font-size:16px;color:#fff;mix-blend-mode:difference;}.formkit-form[data-uid="9809e05442"] .formkit-modal.guard{max-width:420px;width:100%;} .formkit-form[data-uid="9809e05442"]{max-width:700px;}.formkit-form[data-uid="9809e05442"] [data-style="clean"]{width:100%;}.formkit-form[data-uid="9809e05442"] .formkit-fields{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin:0 auto;}.formkit-form[data-uid="9809e05442"] .formkit-field,.formkit-form[data-uid="9809e05442"] .formkit-submit{margin:0 0 15px 0;-webkit-flex:1 0 100%;-ms-flex:1 0 100%;flex:1 0 100%;}.formkit-form[data-uid="9809e05442"] .formkit-powered-by-convertkit-container{margin:0;}.formkit-form[data-uid="9809e05442"] .formkit-submit{position:static;} </style></form>
+    <!-- end ConvertKit embed -->
+    </div>
+  </section>
+
+  <footer>
+    Human Space · @humanspace____
+  </footer>
+
+</div>
+</body>
+</html>
