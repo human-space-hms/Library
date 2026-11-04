@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us | HUMAN SPACE">
+<title>About Us | HUMAN SPACE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f8f7f2;
-  --text: #34352f;
-  --muted: #77786f;
-  --accent: #d8a78c;
-  --line: #e5e2d9;
+  --bg: #FBF6EA;
+  --text: #3A342A;
+  --muted: rgba(58,52,42,0.62);
+  --accent: #A8895F;
+  --line: rgba(58,52,42,0.15);
 }
 
 * {
@@ -28,7 +28,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Work Sans', 'Noto Sans TC', sans-serif;
+  font-family: 'Noto Sans TC', 'Work Sans', sans-serif;
   line-height: 1.8;
 }
 
@@ -42,7 +42,7 @@ button {
 }
 
 .container {
-  width: min(880px, 88%);
+  width: min(480px, 88%);
   margin: auto;
 }
 
@@ -282,9 +282,9 @@ footer {
     gap: 10px;
   }
 
-  .explore-grid {
-    grid-template-columns: 1fr;
-  }
+.explore-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
 
   section.content-section {
     padding: 40px 0;
@@ -292,33 +292,87 @@ footer {
 }
 /* Human Space Typography */
 
-.section-label,
-.philosophy-item h3 {
+/* Main title */
+.hero h1 {
   font-family: 'Playfair Display', serif;
   font-style: italic;
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 38px);
+  letter-spacing: 1px;
 }
 
+/* Hero subtitle */
+.hero p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+/* Section labels */
+.section-label {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+/* Chinese headings */
 h2 {
-  font-family: 'Noto Sans TC', 'Work Sans', sans-serif;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 24px;
   font-weight: 600;
 }
 
-[data-lang="en"] h2,
-[data-lang="en"] .quote,
+/* Chinese quote */
+.quote {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 600;
+  font-size: clamp(21px, 4vw, 27px);
+}
+
+/* Philosophy headings */
+.philosophy-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+/* English headings */
+[data-lang="en"] h2 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+/* English quote */
+[data-lang="en"] .quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* English body */
+[data-lang="en"] p {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* English philosophy & explore headings */
+[data-lang="en"] .philosophy-item h3,
 [data-lang="en"] .explore-item h3 {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 600;
 }
 
-[data-lang="en"] p,
-[data-lang="en"] .explore-item p,
-[data-lang="en"] .philosophy-item p {
-  font-family: 'Work Sans', sans-serif;
-}
-
-.main-button {
-  font-family: 'Work Sans', sans-serif;
+/* Buttons */
+.main-button,
+.language button {
+  font-family: 'Work Sans', 'Noto Sans TC', sans-serif;
 }
   
 </style>
