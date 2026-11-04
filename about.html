@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | HUMAN SPACE</title>
+
+<style>
+:root {
+  --bg: #f8f7f2;
+  --text: #34352f;
+  --muted: #77786f;
+  --accent: #d8a78c;
+  --line: #e5e2d9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, "Noto Sans TC", sans-serif;
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.container {
+  width: min(880px, 88%);
+  margin: auto;
+}
+
+/* Language switch */
+
+.language {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 24px;
+}
+
+.language button {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  padding: 5px 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.language button.active {
+  background: var(--text);
+  color: white;
+  border-color: var(--text);
+}
+
+/* Hero */
+
+.hero {
+  text-align: center;
+  padding: 35px 0 55px;
+}
+
+.logo {
+  width: 125px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 25px;
+}
+
+.hero-image {
+  width: 100%;
+  max-height: 390px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 32px 0 5px;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Sections */
+
+section.content-section {
+  padding: 55px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-label {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 8px 0 22px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 2;
+}
+
+.story-text {
+  max-width: 700px;
+}
+
+.quote {
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-size: clamp(21px, 4vw, 28px);
+  line-height: 1.7;
+  margin: 20px 0 28px;
+}
+
+/* Philosophy */
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.philosophy-item {
+  padding: 22px 15px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.philosophy-item h3 {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.philosophy-item p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Explore */
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.explore-item {
+  padding: 24px;
+  background: #efede5;
+  border-radius: 5px;
+}
+
+.explore-item h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+
+.explore-item p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Support */
+
+.support {
+  text-align: center;
+  padding: 60px 20px;
+  background: #eeece3;
+  border-radius: 5px;
+}
+
+.support h2 {
+  margin-bottom: 10px;
+}
+
+.support p {
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 25px;
+  font-size: 14px;
+}
+
+.main-button {
+  display: inline-block;
+  padding: 11px 28px;
+  background: var(--text);
+  color: white;
+  border-radius: 30px;
+  font-size: 13px;
+  transition: opacity .2s;
+}
+
+.main-button:hover {
+  opacity: .75;
+}
+
+/* Back to Library */
+
+.back {
+  text-align: center;
+  padding: 45px 0;
+}
+
+.back a {
+  display: inline-block;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 4px;
+  font-size: 14px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Language display */
+
+[data-lang] {
+  display: none;
+}
+
+[data-lang].visible {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 25px;
+  }
+
+  .logo {
+    width: 105px;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  section.content-section {
+    padding: 40px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Language Switch -->
+  <div class="language">
+    <button id="zhBtn" class="active" onclick="setLanguage('zh')">中文</button>
+    <button id="enBtn" onclick="setLanguage('en')">EN</button>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <img class="logo" src="logo.png" alt="Human Space Logo">
+
+    <img class="hero-image"
+         src="hero-house.jpg"
+         alt="Human Space">
+
+    <div data-lang="zh" class="visible">
+      <h1>ABOUT HUMAN SPACE</h1>
+      <p>生活的第三空間・一本寫給大人的童書</p>
+    </div>
+
+    <div data-lang="en">
+      <h1>ABOUT HUMAN SPACE</h1>
+      <p>The Third Place for Self-Awareness</p>
+    </div>
+  </header>
+
+  <!-- Our Story -->
+  <section class="content-section">
+
+    <div data-lang="zh" class="visible">
+      <div class="section-label">01 / Our Story</div>
+      <h2>我們的故事</h2>
+
+      <div class="quote">
+        15 歲，我們認識彼此；<br>
+        30 歲，我們開始重新認識自己。
+      </div>
+
+      <div class="story-text">
+        <p>
+          Human Space 誕生於兩個相識十五年的朋友。
+          從學生時期到成年，我們一起經歷不同的人生階段，
+          也逐漸發現，認識自己是一段持續探索的旅程。
+        </p>
+
+        <p>
+          我們好奇情緒如何形成、關係如何影響我們，
+          也對心理學、大腦科學與人類行為充滿興趣。
+          於是，我們創造了 Human Space，
+          希望讓這些知識走進日常生活。
+        </p>
+
+        <p>
+          我們以心理學與科學研究為基礎，
+          將知識轉化為生活故事、圖文、動畫與互動測驗。
+          透過不同的創作形式，讓複雜的概念變得容易理解，
+          也讓探索自己成為一件有趣的事。
+        </p>
+      </div>
+    </div>
+
+    <div data-lang="en">
+      <div class="section-label">01 / Our Story</div>
+      <h2>Where It All Began</h2>
+
+      <div class="quote">
+        We met at 15.<br>
+        At 30, we began to rediscover ourselves.
+      </div>
+
+      <div class="story-text">
+        <p>
+          Human Space was created by two friends
+          who have known each other for over fifteen years.
+          As we grew through different stages of life,
+          we discovered that understanding ourselves
+          is a journey that never really ends.
+        </p>
+
+        <p>
+          We became curious about emotions, relationships,
+          psychology, neuroscience and human behavior.
+          This curiosity inspired us to create Human Space:
+          a place where knowledge can become part of everyday life.
+        </p>
+
+        <p>
+          Grounded in psychological research and science,
+          we turn ideas into stories, illustrations,
+          animations and interactive experiences,
+          making complex concepts easier to understand
+          and self-discovery more enjoyable.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Philosophy -->
+  <section class="content-section">
+
+    <div data-lang="zh" class="visible">
+      <div class="section-label">02 / Our Philosophy</div>
+      <h2>我們相信的事</h2>
+      <p>
+        每個人都有自己的內在世界。
+        保持好奇、理解差異，並透過連結認識彼此，
+        讓我們有機會用不同的角度看待自己與生活。
+      </p>
+
+      <div class="philosophy-grid">
+        <div class="philosophy-item">
+          <h3>Curiosity</h3>
+          <p>保持好奇，探索未知的自己。</p>
+        </div>
+
+        <div class="philosophy-item">
+          <h3>Understanding</h3>
+          <p>理解情緒，也理解彼此的不同。</p>
+        </div>
+
+        <div class="philosophy-item">
+          <h3>Connection</h3>
+          <p>透過連結，發現更多可能。</p>
+        </div>
+      </div>
+    </div>
+
+    <div data-lang="en">
+      <div class="section-label">02 / Our Philosophy</div>
+      <h2>What We Believe</h2>
+      <p>
+        Everyone has an inner world of their own.
+        By staying curious, embracing differences
+        and connecting with one another,
+        we discover new ways to understand ourselves and life.
+      </p>
+
+      <div class="philosophy-grid">
+        <div class="philosophy-item">
+          <h3>Curiosity</h3>
+          <p>Stay curious. Explore the unknown.</p>
+        </div>
+
+        <div class="philosophy-item">
+          <h3>Understanding</h3>
+          <p>Understand emotions and embrace differences.</p>
+        </div>
+
+        <div class="philosophy-item">
+          <h3>Connection</h3>
+          <p>Discover more through human connection.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Explore -->
+  <section class="content-section">
+
+    <div data-lang="zh" class="visible">
+      <div class="section-label">03 / What We Explore</div>
+      <h2>探索內在世界的不同角落</h2>
+      <p>
+        從情緒、關係到大腦與日常生活，
+        一起發現那些關於人的有趣知識。
+      </p>
+
+      <div class="explore-grid">
+        <div class="explore-item">
+          <h3>01. 自我認識</h3>
+          <p>人格特質、自我覺察、心理測驗與內在探索。</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>02. 情緒與關係</h3>
+          <p>情緒理解、依附關係、人際互動與界線。</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>03. 心理學與大腦</h3>
+          <p>心理學概念、神經科學、記憶與人類行為。</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>04. 日常生活</h3>
+          <p>生活習慣、文化觀察與那些有趣的人類現象。</p>
+        </div>
+      </div>
+    </div>
+
+    <div data-lang="en">
+      <div class="section-label">03 / What We Explore</div>
+      <h2>Explore the World Within</h2>
+      <p>
+        From emotions and relationships to the brain
+        and everyday life, there is always something
+        fascinating to discover about being human.
+      </p>
+
+      <div class="explore-grid">
+        <div class="explore-item">
+          <h3>01. Self-awareness</h3>
+          <p>Personality, self-discovery and interactive quizzes.</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>02. Emotions & Relationships</h3>
+          <p>Emotional awareness, attachment, connection and boundaries.</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>03. Psychology & Neuroscience</h3>
+          <p>Psychology, the brain, memory and human behavior.</p>
+        </div>
+
+        <div class="explore-item">
+          <h3>04. Everyday Life</h3>
+          <p>Habits, culture and the fascinating side of being human.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Support Us -->
+  <section class="content-section">
+
+    <div class="support">
+
+      <div data-lang="zh" class="visible">
+        <div class="section-label">04 / Support Us</div>
+        <h2>讓這個空間繼續存在</h2>
+        <p>
+          Human Space 是一個持續探索與創作的計畫。
+          如果你喜歡這裡的內容，歡迎透過小額贊助支持我們，
+          讓更多有趣的知識與想法得以分享。
+        </p>
+        <a class="main-button"
+           href="https://portaly.cc/human_space"
+           target="_blank"
+           rel="noopener">
+          支持 Human Space
+        </a>
+      </div>
+
+      <div data-lang="en">
+        <div class="section-label">04 / Support Us</div>
+        <h2>Help This Space Grow</h2>
+        <p>
+          Human Space is an ongoing journey of learning
+          and creating. If you enjoy what we do,
+          your support helps us share more ideas,
+          stories and discoveries with the world.
+        </p>
+        <a class="main-button"
+           href="https://portaly.cc/human_space"
+           target="_blank"
+           rel="noopener">
+          Support Human Space
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Back to Library -->
+  <div class="back">
+
+    <div data-lang="zh" class="visible">
+      <a href="/Library/">← 回到 Library，繼續探索</a>
+    </div>
+
+    <div data-lang="en">
+      <a href="/Library/">← Back to Library & Keep Exploring</a>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  HUMAN SPACE © 2026
+</footer>
+
+<script>
+function setLanguage(lang) {
+
+  document.documentElement.lang =
+    lang === "zh" ? "zh-Hant" : "en";
+
+  document.querySelectorAll("[data-lang]").forEach(el => {
+    el.classList.toggle("visible", el.dataset.lang === lang);
+  });
+
+  document.getElementById("zhBtn").classList.toggle(
+    "active", lang === "zh"
+  );
+
+  document.getElementById("enBtn").classList.toggle(
+    "active", lang === "en"
+  );
+
+}
+</script>
+
+</body>
+</html>
