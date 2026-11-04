@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us | HUMAN SPACE</title>
-
+<title>About Us | HUMAN SPACE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f8f7f2;
@@ -27,7 +28,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, "Noto Sans TC", sans-serif;
+  font-family: 'Work Sans', 'Noto Sans TC', sans-serif;
   line-height: 1.8;
 }
 
@@ -93,10 +94,11 @@ button {
 }
 
 .hero h1 {
-  font-family: Georgia, serif;
-  font-size: clamp(32px, 6vw, 48px);
-  font-weight: 400;
-  letter-spacing: 2px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 600;
+  letter-spacing: 1px;
   margin: 32px 0 5px;
 }
 
@@ -288,6 +290,37 @@ footer {
     padding: 40px 0;
   }
 }
+/* Human Space Typography */
+
+.section-label,
+.philosophy-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+h2 {
+  font-family: 'Noto Sans TC', 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+[data-lang="en"] h2,
+[data-lang="en"] .quote,
+[data-lang="en"] .explore-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
+}
+
+[data-lang="en"] p,
+[data-lang="en"] .explore-item p,
+[data-lang="en"] .philosophy-item p {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.main-button {
+  font-family: 'Work Sans', sans-serif;
+}
+  
 </style>
 </head>
 
