@@ -8,125 +8,158 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ===== Tokens (same as Library index.html) ===== */
 :root {
-  --bg: #FBF6EA;
-  --text: #3A342A;
-  --muted: rgba(58,52,42,0.62);
-  --accent: #A8895F;
+  --cream: #FBF6EA;
+  --paper-deep: #F3EAD4;
+  --card: #FFFDF8;
+  --ink: #3A342A;
+  --ink-soft: rgba(58,52,42,0.62);
+  --ink-faint: rgba(58,52,42,0.4);
   --line: rgba(58,52,42,0.15);
+  --shadow: 0 20px 44px -20px rgba(58,52,42,0.28);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* Body font = Noto Sans TC for BOTH languages, same as Library */
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Sans TC', 'Work Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Sans TC', sans-serif;
+  -webkit-font-smoothing: antialiased;
   line-height: 1.8;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
 
 .container {
   width: min(480px, 88%);
-  margin: auto;
+  margin: 0 auto;
 }
 
-/* Language switch */
-
-.language {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding-top: 24px;
-}
-
-.language button {
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--muted);
-  padding: 5px 14px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.language button.active {
-  background: var(--text);
-  color: white;
-  border-color: var(--text);
-}
-
-/* Hero */
-
+/* ===== Hero image (same size logic as Library) ===== */
 .hero {
-  text-align: center;
-  padding: 35px 0 55px;
-}
-
-.logo {
-  width: 125px;
-  height: auto;
-  object-fit: contain;
-  margin-bottom: 25px;
-}
-
-.hero-image {
+  position: relative;
   width: 100%;
-  max-height: 390px;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.hero-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+
+.hero-media img.house {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 5px;
+  object-position: 50% 0%;
   display: block;
 }
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: clamp(28px, 5vw, 38px);
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin: 32px 0 5px;
+@media (min-width: 700px) {
+  .hero-media { aspect-ratio: 1078/1026; }
 }
 
-.hero p {
-  color: var(--muted);
-  font-size: 14px;
+/* Language toggle: single pill, same as Library */
+.lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(58,52,42,0.2);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+/* Logo on the image, same as Library masthead */
+.masthead {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+}
+
+.masthead img {
+  height: 17px;
+  width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+}
+
+/* ===== Page title under the image ===== */
+.hero-text {
+  text-align: center;
+  padding: 26px 0 40px;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(26px, 6vw, 34px);
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+
+/* Chinese subtitle: normal Noto Sans TC (no faux italic) */
+.hero-text p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
   margin: 0;
 }
 
-/* Sections */
-
-section.content-section {
-  padding: 55px 0;
-  border-top: 1px solid var(--line);
+/* English subtitle: Playfair italic, same as Library tagline */
+.hero-text [data-lang="en"] p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 17px;
 }
 
+/* ===== Sections ===== */
+section.content-section {
+  padding: 50px 0;
+  border-top: 1px dashed var(--line);
+}
+
+/* Section label: same as Library "EXPLORE THE LIBRARY" */
 .section-label {
-  color: var(--accent);
-  font-family: Georgia, serif;
-  font-size: 13px;
-  letter-spacing: 2px;
+  font-size: 11px;
+  letter-spacing: .16em;
   text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
 }
 
 h2 {
-  font-size: 25px;
-  font-weight: 500;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
   margin: 8px 0 22px;
+}
+
+[data-lang="en"] h2 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 p {
@@ -134,47 +167,62 @@ p {
   line-height: 2;
 }
 
-.story-text {
-  max-width: 700px;
+[data-lang="en"] p {
+  font-size: 14.5px;
+  line-height: 1.9;
 }
 
+.story-text { max-width: 700px; }
+
 .quote {
-  font-family: Georgia, "Noto Serif TC", serif;
-  font-size: clamp(21px, 4vw, 28px);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 600;
+  font-size: clamp(20px, 4vw, 24px);
   line-height: 1.7;
   margin: 20px 0 28px;
 }
 
-/* Philosophy */
+[data-lang="en"] .quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+}
 
+/* ===== Cards (Library card style) ===== */
 .philosophy-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 14px;
   margin-top: 30px;
+}
+
+.philosophy-item,
+.explore-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 20px -14px rgba(58,52,42,0.3);
 }
 
 .philosophy-item {
   padding: 22px 15px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
   text-align: center;
 }
 
 .philosophy-item h3 {
-  font-family: Georgia, serif;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: 19px;
-  font-weight: 400;
+  font-weight: 600;
   margin: 0 0 8px;
 }
 
 .philosophy-item p {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-soft);
   margin: 0;
+  line-height: 1.7;
 }
-
-/* Explore */
 
 .explore-grid {
   display: grid;
@@ -183,229 +231,131 @@ p {
   margin-top: 25px;
 }
 
-.explore-item {
-  padding: 24px;
-  background: #efede5;
-  border-radius: 5px;
-}
+.explore-item { padding: 22px 20px; }
 
 .explore-item h3 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 8px;
 }
 
-.explore-item p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0;
-}
-
-/* Support */
-
-.support {
-  text-align: center;
-  padding: 60px 20px;
-  background: #eeece3;
-  border-radius: 5px;
-}
-
-.support h2 {
-  margin-bottom: 10px;
-}
-
-.support p {
-  color: var(--muted);
-  max-width: 520px;
-  margin: 0 auto 25px;
-  font-size: 14px;
-}
-
-.main-button {
-  display: inline-block;
-  padding: 11px 28px;
-  background: var(--text);
-  color: white;
-  border-radius: 30px;
-  font-size: 13px;
-  transition: opacity .2s;
-}
-
-.main-button:hover {
-  opacity: .75;
-}
-
-/* Back to Library */
-
-.back {
-  text-align: center;
-  padding: 45px 0;
-}
-
-.back a {
-  display: inline-block;
-  border-bottom: 1px solid var(--text);
-  padding-bottom: 4px;
-  font-size: 14px;
-}
-
-footer {
-  text-align: center;
-  padding: 25px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-/* Language display */
-
-[data-lang] {
-  display: none;
-}
-
-[data-lang].visible {
-  display: block;
-}
-
-@media (max-width: 600px) {
-  .hero {
-    padding-top: 25px;
-  }
-
-  .logo {
-    width: 105px;
-  }
-
-  .philosophy-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-.explore-grid {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-  section.content-section {
-    padding: 40px 0;
-  }
-}
-/* Human Space Typography */
-
-/* Main title */
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(28px, 5vw, 38px);
-  letter-spacing: 1px;
-}
-
-/* Hero subtitle */
-.hero p {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 17px;
-  color: var(--muted);
-}
-
-/* Section labels */
-.section-label {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-}
-
-/* Chinese headings */
-h2 {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-/* Chinese quote */
-.quote {
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 600;
-  font-size: clamp(21px, 4vw, 27px);
-}
-
-/* Philosophy headings */
-.philosophy-item h3 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 19px;
-  font-weight: 500;
-}
-
-/* English headings */
-[data-lang="en"] h2 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 25px;
-  font-weight: 600;
-}
-
-/* English quote */
-[data-lang="en"] .quote {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 500;
-}
-
-/* English body */
-[data-lang="en"] p {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-/* English philosophy & explore headings */
-[data-lang="en"] .philosophy-item h3,
 [data-lang="en"] .explore-item h3 {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 600;
 }
 
-/* Buttons */
-.main-button,
-.language button {
-  font-family: 'Work Sans', 'Noto Sans TC', sans-serif;
+.explore-item p {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.7;
 }
-  
+
+/* ===== Support ===== */
+.support {
+  text-align: center;
+  padding: 44px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.support h2 { margin-bottom: 10px; }
+
+.support p {
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto 25px;
+  font-size: 14px;
+}
+
+.main-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 26px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity .2s;
+}
+
+.main-button:hover { opacity: .75; }
+
+/* ===== Back to Library ===== */
+.back {
+  text-align: center;
+  padding: 45px 0 10px;
+}
+
+.back a {
+  display: inline-block;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+  font-size: 14px;
+}
+
+/* ===== Footer (same as Library) ===== */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 0 20px 50px;
+}
+
+footer .handle { font-size: 11px; color: var(--ink-faint); }
+
+footer .copyright {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+  opacity: 0.75;
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* ===== Language display ===== */
+[data-lang] { display: none; }
+[data-lang].visible { display: block; }
+
+@media (max-width: 600px) {
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  section.content-section { padding: 40px 0; }
+}
 </style>
 </head>
 
 <body>
 
+<!-- Hero (same image size & logo placement as Library) -->
+<header class="hero">
+  <div class="hero-media">
+    <img class="house" src="hero-house.jpg" alt="Human Space illustrated house">
+  </div>
+  <button class="lang-toggle" id="langToggle" type="button" onclick="toggleLanguage()">EN</button>
+  <div class="masthead">
+    <img src="logo.png" alt="Human Space">
+  </div>
+</header>
+
 <div class="container">
 
-  <!-- Language Switch -->
-  <div class="language">
-    <button id="zhBtn" class="active" onclick="setLanguage('zh')">中文</button>
-    <button id="enBtn" onclick="setLanguage('en')">EN</button>
-  </div>
-
-  <!-- Hero -->
-  <header class="hero">
-    <img class="logo" src="logo.png" alt="Human Space Logo">
-
-    <img class="hero-image"
-         src="about-us-hero.JPG"
-         alt="Human Space">
-
+  <!-- Page title -->
+  <div class="hero-text">
     <div data-lang="zh" class="visible">
-      <h1>ABOUT HUMAN SPACE</h1>
+      <h1>About Human Space</h1>
       <p>生活的第三空間・一本寫給大人的童書</p>
     </div>
 
     <div data-lang="en">
-      <h1>ABOUT HUMAN SPACE</h1>
+      <h1>About Human Space</h1>
       <p>The Third Place for Self-Awareness</p>
     </div>
-  </header>
+  </div>
 
   <!-- Our Story -->
   <section class="content-section">
@@ -589,12 +539,12 @@ h2 {
         </div>
 
         <div class="explore-item">
-          <h3>02. Emotions & Relationships</h3>
+          <h3>02. Emotions &amp; Relationships</h3>
           <p>Emotional awareness, attachment, connection and boundaries.</p>
         </div>
 
         <div class="explore-item">
-          <h3>03. Psychology & Neuroscience</h3>
+          <h3>03. Psychology &amp; Neuroscience</h3>
           <p>Psychology, the brain, memory and human behavior.</p>
         </div>
 
@@ -653,11 +603,11 @@ h2 {
   <div class="back">
 
     <div data-lang="zh" class="visible">
-      <a href="/Library/">← 回到 Library，繼續探索</a>
+      <a href="index.html">← 回到 Library，繼續探索</a>
     </div>
 
     <div data-lang="en">
-      <a href="/Library/">← Back to Library & Keep Exploring</a>
+      <a href="index.html">← Back to Library &amp; Keep Exploring</a>
     </div>
 
   </div>
@@ -665,7 +615,8 @@ h2 {
 </div>
 
 <footer>
-  HUMAN SPACE © 2026
+  <div class="handle">Human Space · @humanspace____</div>
+  <div class="copyright">&copy; 2026 Human Space. All rights reserved.</div>
 </footer>
 
 <script>
@@ -678,14 +629,14 @@ function setLanguage(lang) {
     el.classList.toggle("visible", el.dataset.lang === lang);
   });
 
-  document.getElementById("zhBtn").classList.toggle(
-    "active", lang === "zh"
-  );
+  document.getElementById("langToggle").textContent =
+    lang === "zh" ? "EN" : "中文";
 
-  document.getElementById("enBtn").classList.toggle(
-    "active", lang === "en"
-  );
+}
 
+function toggleLanguage() {
+  var isZh = document.documentElement.lang === "zh-Hant";
+  setLanguage(isZh ? "en" : "zh");
 }
 </script>
 
