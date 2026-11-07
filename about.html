@@ -41,7 +41,7 @@ button { font: inherit; }
   margin: 0 auto;
 }
 
-/* ===== Hero image (same size logic as Library) ===== */
+/* ===== Hero image (修正手機與電腦版的裁切與顯示範圍) ===== */
 .hero {
   position: relative;
   width:100%;
@@ -52,7 +52,7 @@ button { font: inherit; }
 .hero-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1; /* 手機版呈現正方形，對應圖四中間人物範圍 */
   overflow: hidden;
 }
 
@@ -60,12 +60,17 @@ button { font: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%; /* 讓手機版正方形置中對準人物 */
   display: block;
 }
 
 @media (min-width: 700px) {
-  .hero-media { aspect-ratio: 1078/1026; }
+  .hero-media { 
+    aspect-ratio: 16/9; /* 電腦版改為寬螢幕比例，對應圖二紅框範圍 */
+  }
+  .hero-media img.house {
+    object-position: 50% 40%; /* 調整電腦版圖片上下對齊位置 */
+  }
 }
 
 /* Language toggle: single pill, same as Library */
