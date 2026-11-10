@@ -334,20 +334,169 @@ section.content-section [data-lang] > p {
 }
 
 /* ===== Footer (same as Library) ===== */
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 0 20px 50px;
+footer{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  margin-top:40px;
+  min-height:400px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  color:#fff;
+  background:var(--paper-deep) url('footer-img.jpg') center / cover no-repeat;
 }
 
-footer .handle { font-size: 11px; color: var(--ink-faint); }
+/* 上緣：從奶油底色淡入圖片，和 hero 一樣柔和銜接頁面 */
+footer::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:140px;
+  background:linear-gradient(180deg,
+    var(--cream) 0%,
+    rgba(251,246,234,0.75) 35%,
+    rgba(251,246,234,0.25) 70%,
+    rgba(251,246,234,0) 100%);
+  z-index:0; pointer-events:none;
+}
 
-footer .copyright {
-  font-size: 10.5px;
-  color: var(--ink-faint);
-  margin-top: 6px;
-  opacity: 0.75;
-  font-family: 'Work Sans', sans-serif;
+/* 下方：只加一層很輕的暖棕漸層，讓白字好讀（圖片本身維持原色） */
+footer::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(58,52,42,0) 25%,
+    rgba(58,52,42,0.24) 58%,
+    rgba(58,52,42,0.58) 100%);
+  z-index:0; pointer-events:none;
+}
+
+.footer-main,
+.footer-bottom{ position:relative; z-index:1; }
+
+.footer-main{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:120px 30px 34px;
+}
+
+/* Logo（和 hero 上方的 logo 同樣處理） */
+.footer-logo{
+  display:inline-block;
+  margin-bottom:20px;
+}
+
+.footer-logo img{
+  height:34px;
+  width:auto;
+  display:block;
+  filter:brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+}
+
+/* Brand Description */
+.footer-description{
+  font-family:'Noto Serif TC',serif;
+  font-size:19px;
+  font-weight:600;
+  line-height:1.8;
+  letter-spacing:0.04em;
+  margin-bottom:26px;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* English version: same italic serif as the hero subtitle */
+.footer-description[data-lang="en"]{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:20px;
+  letter-spacing:0.01em;
+}
+
+/* Instagram Button */
+.instagram-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 21px;
+  border:1px solid rgba(255,255,255,0.75);
+  border-radius:999px;
+  color:#fff;
+  background:rgba(255,255,255,0.14);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.03em;
+  transition:all 0.3s ease;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+
+.instagram-btn:hover{
+  background:rgba(255,255,255,0.28);
+  border-color:#fff;
+}
+
+.instagram-btn svg{
+  width:19px;
+  height:19px;
+  flex-shrink:0;
+}
+
+/* Footer Bottom：不再用深色底，只留一條細線 */
+.footer-bottom{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 30px 28px;
+  font-size:11px;
+  line-height:1.9;
+  color:rgba(255,255,255,0.88);
+  text-shadow:0 1px 3px rgba(0,0,0,0.45);
+}
+
+.footer-bottom-inner{
+  border-top:1px solid rgba(255,255,255,0.35);
+  padding-top:18px;
+}
+
+.footer-bottom .copyright{
+  font-family:'Work Sans',sans-serif;
+  margin-bottom:6px;
+  font-size:11px;
+  letter-spacing:0.02em;
+}
+
+.footer-bottom .disclaimer{
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,0.8);
+}
+
+/* Mobile */
+@media(max-width:600px){
+  footer{ min-height:380px; }
+
+  footer::before{ height:110px; }
+
+  .footer-main{
+    padding:100px 24px 30px;
+  }
+
+  .footer-logo img{ height:30px; }
+
+  .footer-description{
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  .footer-description[data-lang="en"]{ font-size:17px; }
+
+  .footer-bottom{
+    padding:0 24px 24px;
+    font-size:10px;
+  }
+
+  .footer-bottom .copyright{ font-size:10px; }
 }
 
 /* ===== Language display ===== */
@@ -655,9 +804,70 @@ footer .copyright {
 </div>
 
 <footer>
-  <div class="handle">Human Space · @humanspace____</div>
-  <div class="copyright">&copy; 2026 Human Space. All rights reserved.</div>
+
+  <!-- Footer Main -->
+  <div class="footer-main">
+
+    <!-- Human Space Logo -->
+    <a class="footer-logo"
+       href="https://human-space-hms.github.io/Library/index.html">
+      <img src="logo.png" alt="Human Space">
+    </a>
+
+    <!-- Brand Description -->
+    <div class="footer-description visible" data-lang="zh">
+      生活的第三空間，大人的心理健康圖書館
+    </div>
+    <div class="footer-description" data-lang="en">
+      A third space for life. A mental wellness library for grown-ups.
+    </div>
+
+    <!-- Instagram Button -->
+    <a class="instagram-btn"
+       href="https://www.instagram.com/humanspace____?psln=OTlqa2d1MHBiMnk="
+       target="_blank"
+       rel="noopener noreferrer">
+
+      <svg viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1"
+                fill="currentColor" stroke="none"/>
+      </svg>
+
+      <span class="visible" data-lang="zh">追蹤 Instagram</span>
+      <span data-lang="en">Follow on Instagram</span>
+
+    </a>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+
+      <div class="copyright">
+        &copy; 2026 Human Space. All rights reserved.
+      </div>
+
+      <div class="disclaimer visible" data-lang="zh">
+        本站內容與工具僅供一般知識分享及自我探索使用，無法取代個別專業評估與協助
+      </div>
+      <div class="disclaimer" data-lang="en">
+        The content and tools on this site are for general knowledge sharing and self-exploration only. They are not a substitute for individual professional assessment or support.
+      </div>
+
+    </div>
+  </div>
+
 </footer>
+
 
 <script>
 function setLanguage(lang) {
