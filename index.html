@@ -117,18 +117,6 @@ footer{
   background:var(--paper-deep) url('footer-img.jpg') center / cover no-repeat;
 }
 
-/* 上緣：從奶油底色淡入圖片，和 hero 一樣柔和銜接頁面 */
-footer::before{
-  content:"";
-  position:absolute; left:0; right:0; top:0; height:100px;
-  background:linear-gradient(180deg,
-    var(--cream) 0%,
-    rgba(251,246,234,0.75) 35%,
-    rgba(251,246,234,0.25) 70%,
-    rgba(251,246,234,0) 100%);
-  z-index:0; pointer-events:none;
-}
-
 /* 下方：只加一層很輕的暖棕漸層，讓白字好讀（圖片本身維持原色） */
 footer::after{
   content:"";
