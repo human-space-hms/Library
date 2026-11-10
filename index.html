@@ -103,45 +103,64 @@
     padding:13px 26px; border-radius:999px;
   }
 
-  
 /* ---------- Footer ---------- */
 footer{
-  width:100vw;
   position:relative;
-  left:50%;
-  transform:translateX(-50%);
-  margin-top:60px;
-  text-align:left;
-  color:#F8F4E9;
-
-  /* 深綠色遮罩，降低背景圖片干擾 */
-  background:
-    linear-gradient(
-      90deg,
-      rgba(9,43,38,0.2) 0%,
-      rgba(9,43,38,0.78) 55%,
-      rgba(9,43,38,0.68) 100%
-    ),
-    url('footer-img.jpg') center center / cover no-repeat;
+  isolation:isolate;
+  overflow:hidden;
+  margin-top:20px;
+  min-height:400px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  color:#fff;
+  background:var(--paper-deep) url('footer-img.jpg') center / cover no-repeat;
 }
+
+/* 上緣：從奶油底色淡入圖片，和 hero 一樣柔和銜接頁面 */
+footer::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:140px;
+  background:linear-gradient(180deg,
+    var(--cream) 0%,
+    rgba(251,246,234,0.75) 35%,
+    rgba(251,246,234,0.25) 70%,
+    rgba(251,246,234,0) 100%);
+  z-index:0; pointer-events:none;
+}
+
+/* 下方：只加一層很輕的暖棕漸層，讓白字好讀（圖片本身維持原色） */
+footer::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(58,52,42,0) 25%,
+    rgba(58,52,42,0.24) 58%,
+    rgba(58,52,42,0.58) 100%);
+  z-index:0; pointer-events:none;
+}
+
+.footer-main,
+.footer-bottom{ position:relative; z-index:1; }
 
 .footer-main{
+  width:100%;
   max-width:1100px;
   margin:0 auto;
-  padding:65px 30px 55px;
+  padding:120px 30px 34px;
 }
 
-/* Logo */
+/* Logo（和 hero 上方的 logo 同樣處理） */
 .footer-logo{
   display:inline-block;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
 .footer-logo img{
   height:34px;
   width:auto;
   display:block;
-  filter:brightness(0) invert(1);
+  filter:brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,0,0,0.25));
 }
 
 /* Brand Description */
@@ -151,9 +170,9 @@ footer{
   font-weight:600;
   line-height:1.8;
   letter-spacing:0.04em;
-  margin-bottom:28px;
-  color:#F8F4E9;
-  text-shadow:0 2px 8px rgba(0,0,0,0.25);
+  margin-bottom:26px;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
 
 /* Instagram Button */
@@ -162,20 +181,21 @@ footer{
   align-items:center;
   gap:10px;
   padding:12px 21px;
-  border:1px solid rgba(248,244,233,0.7);
+  border:1px solid rgba(255,255,255,0.75);
   border-radius:999px;
-  color:#F8F4E9;
-  background:rgba(255,255,255,0.06);
+  color:#fff;
+  background:rgba(255,255,255,0.14);
   font-size:13px;
   font-weight:500;
   letter-spacing:0.03em;
   transition:all 0.3s ease;
   backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
 }
 
 .instagram-btn:hover{
-  background:rgba(255,255,255,0.16);
-  border-color:#FFFFFF;
+  background:rgba(255,255,255,0.28);
+  border-color:#fff;
 }
 
 .instagram-btn svg{
@@ -184,19 +204,21 @@ footer{
   flex-shrink:0;
 }
 
-/* Footer Bottom */
+/* Footer Bottom：不再用深色底，只留一條細線 */
 .footer-bottom{
-  border-top:1px solid rgba(220,229,218,0.22);
-  padding:22px 30px 28px;
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 30px 28px;
   font-size:11px;
   line-height:1.9;
-  color:#B9C8BE;
-  background:rgba(4,28,25,0.28);
+  color:rgba(255,255,255,0.88);
+  text-shadow:0 1px 3px rgba(0,0,0,0.45);
 }
 
 .footer-bottom-inner{
-  max-width:1100px;
-  margin:0 auto;
+  border-top:1px solid rgba(255,255,255,0.35);
+  padding-top:18px;
 }
 
 .footer-bottom .copyright{
@@ -204,33 +226,24 @@ footer{
   margin-bottom:6px;
   font-size:11px;
   letter-spacing:0.02em;
-  color:#D5DDD4;
 }
 
 .footer-bottom .disclaimer{
   font-family:'Noto Sans TC',sans-serif;
-  color:#AEBFB4;
+  color:rgba(255,255,255,0.8);
 }
 
 /* Mobile */
 @media(max-width:600px){
-  footer{
-    background:
-      linear-gradient(
-        180deg,
-        rgba(9,43,38,0.86),
-        rgba(9,43,38,0.92)
-      ),
-      url('footer-img.jpg') center center / cover no-repeat;
-  }
+  footer{ min-height:380px; }
+
+  footer::before{ height:110px; }
 
   .footer-main{
-    padding:48px 24px 42px;
+    padding:100px 24px 30px;
   }
 
-  .footer-logo img{
-    height:30px;
-  }
+  .footer-logo img{ height:30px; }
 
   .footer-description{
     font-size:16px;
@@ -238,14 +251,12 @@ footer{
   }
 
   .footer-bottom{
-    padding:20px 24px 25px;
+    padding:0 24px 24px;
     font-size:10px;
   }
 
-  .footer-bottom .copyright{
-    font-size:10px;
-  }
-}
+  .footer-bottom .copyright{ font-size:10px; }
+}  
 </style>
 </head>
 <body data-lang="zh">
@@ -262,6 +273,7 @@ footer{
   </a>
   <div class="library">Library</div>
 </div>
+  </div><!-- /hero -->
 
   <div class="wrap">
 
@@ -436,6 +448,7 @@ footer{
       </div>
     </section>
 
+  </div><!-- /wrap -->
 
 <footer>
 
@@ -495,9 +508,6 @@ footer{
 
 </footer>
 
-
-  </div>
-
 <script>
   var btn = document.getElementById('langToggle');
   btn.addEventListener('click', function(){
@@ -508,3 +518,4 @@ footer{
 </script>
 </body>
 </html>
+
