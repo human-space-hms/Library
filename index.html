@@ -103,9 +103,149 @@
     padding:13px 26px; border-radius:999px;
   }
 
-  footer{ text-align:center; margin-top:50px; }
-  footer .handle{ font-size:11px; color:var(--ink-faint); }
-  footer .copyright{ font-size:10.5px; color:var(--ink-faint); margin-top:6px; opacity:0.75; font-family:'Work Sans',sans-serif; }
+  
+/* ---------- Footer ---------- */
+footer{
+  width:100vw;
+  position:relative;
+  left:50%;
+  transform:translateX(-50%);
+  margin-top:60px;
+  text-align:left;
+  color:#F8F4E9;
+
+  /* 深綠色遮罩，降低背景圖片干擾 */
+  background:
+    linear-gradient(
+      90deg,
+      rgba(9,43,38,0.88) 0%,
+      rgba(9,43,38,0.78) 55%,
+      rgba(9,43,38,0.68) 100%
+    ),
+    url('footer-img.jpg') center center / cover no-repeat;
+}
+
+.footer-main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:65px 30px 55px;
+}
+
+/* Logo */
+.footer-logo{
+  display:inline-block;
+  margin-bottom:22px;
+}
+
+.footer-logo img{
+  height:34px;
+  width:auto;
+  display:block;
+  filter:brightness(0) invert(1);
+}
+
+/* Brand Description */
+.footer-description{
+  font-family:'Noto Serif TC',serif;
+  font-size:19px;
+  font-weight:600;
+  line-height:1.8;
+  letter-spacing:0.04em;
+  margin-bottom:28px;
+  color:#F8F4E9;
+  text-shadow:0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Instagram Button */
+.instagram-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 21px;
+  border:1px solid rgba(248,244,233,0.7);
+  border-radius:999px;
+  color:#F8F4E9;
+  background:rgba(255,255,255,0.06);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.03em;
+  transition:all 0.3s ease;
+  backdrop-filter:blur(4px);
+}
+
+.instagram-btn:hover{
+  background:rgba(255,255,255,0.16);
+  border-color:#FFFFFF;
+}
+
+.instagram-btn svg{
+  width:19px;
+  height:19px;
+  flex-shrink:0;
+}
+
+/* Footer Bottom */
+.footer-bottom{
+  border-top:1px solid rgba(220,229,218,0.22);
+  padding:22px 30px 28px;
+  font-size:11px;
+  line-height:1.9;
+  color:#B9C8BE;
+  background:rgba(4,28,25,0.28);
+}
+
+.footer-bottom-inner{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.footer-bottom .copyright{
+  font-family:'Work Sans',sans-serif;
+  margin-bottom:6px;
+  font-size:11px;
+  letter-spacing:0.02em;
+  color:#D5DDD4;
+}
+
+.footer-bottom .disclaimer{
+  font-family:'Noto Sans TC',sans-serif;
+  color:#AEBFB4;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  footer{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9,43,38,0.86),
+        rgba(9,43,38,0.92)
+      ),
+      url('footer-img.jpg') center center / cover no-repeat;
+  }
+
+  .footer-main{
+    padding:48px 24px 42px;
+  }
+
+  .footer-logo img{
+    height:30px;
+  }
+
+  .footer-description{
+    font-size:16px;
+    line-height:1.8;
+  }
+
+  .footer-bottom{
+    padding:20px 24px 25px;
+    font-size:10px;
+  }
+
+  .footer-bottom .copyright{
+    font-size:10px;
+  }
+}
 </style>
 </head>
 <body data-lang="zh">
@@ -116,11 +256,12 @@
       <img class="house" src="hero-house.jpg" alt="Human Space illustrated house">
     </div>
     <button class="lang-toggle" id="langToggle" type="button">EN</button>
-    <div class="masthead">
-      <img src="logo.png" alt="Human Space">
-      <div class="library">Library</div>
-    </div>
-  </div>
+  <div class="masthead">
+  <a href="https://human-space-hms.github.io/Library/index.html" aria-label="Human Space Library 首頁">
+    <img src="logo.png" alt="Human Space">
+  </a>
+  <div class="library">Library</div>
+</div>
 
   <div class="wrap">
 
@@ -295,10 +436,65 @@
       </div>
     </section>
 
-    <footer>
-      <div class="handle">Human Space · @humanspace____</div>
-      <div class="copyright">&copy; 2026 Human Space. All rights reserved.</div>
-    </footer>
+
+<footer>
+
+  <!-- Footer Main -->
+  <div class="footer-main">
+
+    <!-- Human Space Logo -->
+    <a class="footer-logo"
+       href="https://human-space-hms.github.io/Library/index.html">
+      <img src="logo.png" alt="Human Space">
+    </a>
+
+    <!-- Brand Description -->
+    <div class="footer-description">
+      生活的第三空間，大人的心理健康圖書館
+    </div>
+
+    <!-- Instagram Button -->
+    <a class="instagram-btn"
+       href="https://www.instagram.com/humanspace____?psln=OTlqa2d1MHBiMnk="
+       target="_blank"
+       rel="noopener noreferrer">
+
+      <svg viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1"
+                fill="currentColor" stroke="none"/>
+      </svg>
+
+      <span>追蹤 Instagram</span>
+
+    </a>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+
+      <div class="copyright">
+        © 2026 Human Space. All rights reserved.
+      </div>
+
+      <div class="disclaimer">
+        本站內容與工具僅供一般知識分享及自我探索使用，無法取代個別專業評估與協助
+      </div>
+
+    </div>
+  </div>
+
+</footer>
+
 
   </div>
 
