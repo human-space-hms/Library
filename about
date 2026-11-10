@@ -4,6 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | HUMAN SPACE</title>
+<meta name="description" content="Human-led. AI-enabled. Made for people. 認識 Human Space：生活的第三空間，一本寫給大人的心理健康圖書館。">
+<meta name="theme-color" content="#FBF6EA">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- 分享預覽 (IG / LINE / Threads / Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Human Space">
+<meta property="og:title" content="About Human Space">
+<meta property="og:description" content="Human-led. AI-enabled. Made for people. 生活的第三空間，一本寫給大人的心理健康圖書館。">
+<meta property="og:url" content="https://human-space-hms.github.io/Library/about.html">
+<meta property="og:image" content="https://human-space-hms.github.io/Library/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="About Human Space">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Human Space">
+<meta name="twitter:description" content="Human-led. AI-enabled. Made for people. 生活的第三空間，一本寫給大人的心理健康圖書館。">
+<meta name="twitter:image" content="https://human-space-hms.github.io/Library/og-image.jpg">
+
+<!-- Google tag (GA4)：把兩個 G-XXXXXXXXXX 換成你的 Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -529,7 +558,7 @@ footer::after{
 
     <div data-lang="en">
       <h1>About Human Space</h1>
-      <p>The Third Place for Self-Awareness</p>
+      <p>A third Place for life. A picture book for grown-ups</p>
     </div>
   </div>
 
@@ -810,7 +839,7 @@ footer::after{
 
       <div data-lang="en">
         <div class="section-label">05 / Support Us</div>
-        <h2>Keep Understanding Growing</h2>
+        <h2>Help This Space Keep Growing</h2>
         <p>
           With the support of our community, we can continue investing in research, content development and interactive experiences, improving the quality of our work while making mental wellness knowledge more accessible.
         </p>
@@ -914,7 +943,19 @@ footer::after{
 
 
 <script>
-function setLanguage(lang) {
+var LANG_KEY = 'hs-lang';
+
+/* 語言：網址 ?lang= > 上次選的 > 瀏覽器語言 */
+function detectLang() {
+  var q = null, saved = null;
+  try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (q === 'zh' || q === 'en') return q;
+  try { saved = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (saved === 'zh' || saved === 'en') return saved;
+  return (navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+}
+
+function setLanguage(lang, remember) {
 
   document.documentElement.lang =
     lang === "zh" ? "zh-Hant" : "en";
@@ -926,13 +967,33 @@ function setLanguage(lang) {
   document.getElementById("langToggle").textContent =
     lang === "zh" ? "EN" : "中文";
 
+  if (remember) {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+  }
 }
 
 function toggleLanguage() {
   var isZh = document.documentElement.lang === "zh-Hant";
-  setLanguage(isZh ? "en" : "zh");
+  setLanguage(isZh ? "en" : "zh", true);
 }
+
+/* 中文段落裡的換行不要變成空白 */
+function tidyChineseSpacing() {
+  var cjk = '[\\u2E80-\\u9FFF\\uFF00-\\uFFEF\\u3000-\\u303F]';
+  var re = new RegExp('(' + cjk + ')\\s*\\n\\s*(?=' + cjk + ')', 'g');
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  var node;
+  while ((node = walker.nextNode())) {
+    var tag = node.parentNode.nodeName;
+    if (tag === 'SCRIPT' || tag === 'STYLE') continue;
+    node.nodeValue = node.nodeValue.replace(re, '$1');
+  }
+}
+
+tidyChineseSpacing();
+setLanguage(detectLang(), false);
 </script>
+
 
 </body>
 </html>
