@@ -86,3 +86,17 @@ li{ margin:0 0 6px; }
 .legal-foot [data-lang].visible{
   display:flex; flex-wrap:wrap; gap:6px 18px;
 }
+
+/* 縮小字級 */
+body{ font-size:13px; line-height:1.85; }
+.brand{ font-size:13px; }
+.lang-toggle{ font-size:12px; padding:5px 14px; }
+h1{ font-size:22px; margin:32px 0 4px; }
+.meta{ font-size:11px; margin:0 0 22px; }
+h2{ font-size:15px; margin:26px 0 6px; }
+.data-table{ font-size:12px; }
+.legal-foot{ font-size:11px; }
+@media(max-width:700px){
+  h1{ font-size:20px; }
+  .data-table td::before{ font-size:11px; }
+}
