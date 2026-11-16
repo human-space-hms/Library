@@ -845,7 +845,7 @@ footer::after{
           Together, we can make understanding ourselves and one another a more meaningful part of everyday life.
         </div>
         <a class="main-button"
-           href="portaly.cc/human_space/support"
+           href="https://portaly.cc/human_space/support"
            target="_blank"
            rel="noopener">
           Support Human Space
@@ -940,7 +940,34 @@ footer::after{
   </div>
 
 <style>
-/* footer links：跟免責聲明同字體、同大小，放在下一行 */
+/* 頁尾修復：補回被刪掉的 .footer-bottom 選擇器，並讓連結跟免責聲明同字體 */
+.footer-main,
+.footer-bottom{ position:relative; z-index:1; }
+
+.footer-bottom{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 30px 28px;
+  font-size:11px;
+  line-height:1.9;
+  color:rgba(255,255,255,0.88);
+  text-shadow:0 1px 3px rgba(0,0,0,0.45);
+}
+.footer-bottom-inner{
+  border-top:1px solid rgba(255,255,255,0.35);
+  padding-top:18px;
+}
+.footer-bottom .copyright{
+  font-family:'Work Sans',sans-serif;
+  margin-bottom:6px;
+  font-size:11px;
+  letter-spacing:0.02em;
+}
+.footer-bottom .disclaimer{
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,0.8);
+}
 .footer-bottom .footer-links{
   margin-top:6px;
   display:flex; flex-wrap:wrap; gap:0 14px;
@@ -953,7 +980,12 @@ footer::after{
   text-decoration-thickness:1px;
   text-underline-offset:3px;
 }
+@media(max-width:600px){
+  .footer-bottom{ padding:0 24px 24px; font-size:10px; }
+  .footer-bottom .copyright{ font-size:10px; }
+}
 </style>
+
 </footer>
 
 
