@@ -24,15 +24,6 @@
 <meta name="twitter:description" content="Human-led. AI-enabled. Made for people. 生活的第三空間，一本寫給大人的心理健康圖書館。">
 <meta name="twitter:image" content="https://human-space-hms.github.io/Library/og-image.jpg">
 
-<!-- Google tag (GA4)：把兩個 G-XXXXXXXXXX 換成你的 Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -388,7 +379,7 @@ footer::after{
 }
 
 .footer-main,
-.footer-bottom{ position:relative; z-index:1; }
+{ position:relative; z-index:1; }
 
 .footer-main{
   width:100%;
@@ -461,7 +452,7 @@ footer::after{
 }
 
 /* Footer Bottom：不再用深色底，只留一條細線 */
-.footer-bottom{
+{
   width:100%;
   max-width:1100px;
   margin:0 auto;
@@ -472,19 +463,19 @@ footer::after{
   text-shadow:0 1px 3px rgba(0,0,0,0.45);
 }
 
-.footer-bottom-inner{
+-inner{
   border-top:1px solid rgba(255,255,255,0.35);
   padding-top:18px;
 }
 
-.footer-bottom .copyright{
+ .copyright{
   font-family:'Work Sans',sans-serif;
   margin-bottom:6px;
   font-size:11px;
   letter-spacing:0.02em;
 }
 
-.footer-bottom .disclaimer{
+ .disclaimer{
   font-family:'Noto Sans TC',sans-serif;
   color:rgba(255,255,255,0.8);
 }
@@ -508,12 +499,12 @@ footer::after{
 
   .footer-description[data-lang="en"]{ font-size:17px; }
 
-  .footer-bottom{
+  {
     padding:0 24px 24px;
     font-size:10px;
   }
 
-  .footer-bottom .copyright{ font-size:10px; }
+   .copyright{ font-size:10px; }
 }
 
 /* ===== Language display ===== */
@@ -528,8 +519,8 @@ footer::after{
   section.content-section { padding: 40px 0; }
 }
 
-  .footer-bottom .footer-links{ margin-top:10px; display:flex; flex-wrap:wrap; gap:6px 18px; }
-.footer-bottom .footer-links a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+   .footer-links{ margin-top:10px; display:flex; flex-wrap:wrap; gap:6px 18px; }
+ .footer-links a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
 
 </style>
 </head>
@@ -925,31 +916,30 @@ footer::after{
 
   </div>
 
-  <!-- Footer Bottom -->
+    <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
-
-      <div class="copyright">
-        &copy; 2026 Human Space. All rights reserved.
-      </div>
-
-      <div class="disclaimer visible" data-lang="zh">
-        本站內容與工具僅供一般知識分享及自我探索使用，無法取代個別專業評估與協助
-      </div>
-      <div class="disclaimer" data-lang="en">
-        The content and tools on this site are for general knowledge sharing and self-exploration only. They are not a substitute for individual professional assessment or support.
-      </div>
-
+      ……（copyright、disclaimer、footer-links 都在這裡面）
     </div>
   </div>
 
-      <div class="footer-links">
-        <a href="privacy.html"><span class="visible" data-lang="zh">隱私權政策</span><span data-lang="en">Privacy Policy</span></a>
-        <a href="terms.html"><span class="visible" data-lang="zh">使用條款</span><span data-lang="en">Terms of Use</span></a>
-      </div>
-
-
+<style>
+/* footer links：跟免責聲明同字體、同大小，放在下一行 */
+.footer-bottom .footer-links{
+  margin-top:6px;
+  display:flex; flex-wrap:wrap; gap:0 14px;
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,0.8);
+}
+.footer-bottom .footer-links a{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+</style>
 </footer>
+
 
 
 <script>
@@ -1004,6 +994,5 @@ tidyChineseSpacing();
 setLanguage(detectLang(), false);
 </script>
 
-<script src="/Library/analytics.js" defer></script>
 </body>
 </html>
