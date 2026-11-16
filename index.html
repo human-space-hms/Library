@@ -566,15 +566,29 @@ footer::after{
         The content and tools on this site are for general knowledge sharing and self-exploration only. They are not a substitute for individual professional assessment or support.
       </div>
 
-    </div>
-  </div>
-
-        <div class="footer-links">
+      <div class="footer-links">
         <a href="privacy.html"><span class="zh-only">隱私權政策</span><span class="en-only">Privacy Policy</span></a>
         <a href="terms.html"><span class="zh-only">使用條款</span><span class="en-only">Terms of Use</span></a>
       </div>
 
+    </div>
+  </div>
 
+<style>
+/* footer links：跟免責聲明同字體、同大小，放在下一行 */
+.footer-bottom .footer-links{
+  margin-top:6px;
+  display:flex; flex-wrap:wrap; gap:0 14px;
+  font-family:'Noto Sans TC',sans-serif;
+  color:rgba(255,255,255,0.8);
+}
+.footer-bottom .footer-links a{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+</style>
 </footer>
 
 
